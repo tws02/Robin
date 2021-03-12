@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "prefix": ".",
   "token": "ODE3MjU1OTE1NTc2MDk4ODE3.YEG24g.vRsTwcTAW2x-u1q9Pl-SiRJTutw",
@@ -10,3 +11,17 @@
   "footer": "Please Practice Risk Management !",
   "mongoURI": "mongodb+srv://admin:admin@robin.jialh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }
+=======
+{
+  "prefix": ".",
+  "token": "botToken",
+  "green": "0x00ff00",
+  "red": "0xff0000",
+  "regular": "0xffffff",
+  "robinID": "762020172151128105",
+  "wsID": "658159665267343361",
+  "photoURL": "https://cdn.discordapp.com/avatars/762020172151128105/24e2e48b52c4ee35bf90861762227672.png?size=256",
+  "footer": "Please Practice Risk Management !",
+  "mongoURI": "mongoURI"
+}
+>>>>>>> 7c6da3bcf7ace29ae224cdc56272eb9b65d749be
