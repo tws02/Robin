@@ -12,7 +12,7 @@ const testMsg = {
 };
 
 module.exports = {
-  name: "test",
+  name: "otest",
   async execute(client, message, args) {
     try {
       const servers = await Server.find();
@@ -21,11 +21,11 @@ module.exports = {
         // fetch channelid
         // send message
         const tChannel = client.channels.cache.get(
-          server.stocksId.substring(2, server.stocksId.length - 1)
+          server.optionsId.substring(2, server.optionsId.length - 1)
         );
 
         tChannel.send({
-          content: `${server.stocksRoleId}`,
+          content: `${server.optionsRoleId}`,
           embed: testMsg
         });
         // store msg id

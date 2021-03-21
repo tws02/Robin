@@ -1,32 +1,25 @@
 const { green, red, regular, photoURL, footer } = require("../config.json");
 const Server = require("../database/models/Server");
 
-const stc = {
-  color: regular,
-  title: "Test Message",
-  description: "testing",
-  footer: {
-    text: footer,
-    icon_url: photoURL
-  }
-};
-
 module.exports = {
-  name: "stc",
+  name: "obto",
   async execute(client, message, args) {
     try {
       const servers = await Server.find();
 
       servers.forEach(async (server) => {
         const tChannel = client.channels.cache.get(
-          server.stocksId.substring(2, server.stocksId.length - 1)
+          server.optionsId.substring(2, server.optionsId.length - 1)
         );
 
         tChannel.send({
-          content: `${server.stocksRoleId}`,
+          content: `${server.optionsRoleId}`,
           embed: {
-            color: red,
-            title: `STC $${args[0] ? args[0].toUpperCase() : "-"}`,
+            color: green,
+            title: `BTO $${args[0] ? args[0].toUpperCase() : "-"} ${
+              args[1] ? args[1] : "-"
+            } ${args[2] ? args[2] : "-"}`,
+            description: ``,
             timestamp: new Date(),
             footer: {
               text: footer,
@@ -34,19 +27,23 @@ module.exports = {
             },
             fields: [
               {
-                name: "Exit Price",
-                value: `$${args[1] ? parseFloat(args[1]).toFixed(2) : "-"}`,
+                name: "Entry",
+                value: `$${args[3] ? parseFloat(args[3]).toFixed(2) : "-"}`,
                 inline: true
               },
               {
-                name: "Size",
-                value: `${args[2] ? args[2] : "-"}%`,
+                name: "SL (Share Value)",
+                value: `$${args[4] ? parseFloat(args[4]).toFixed(2) : "-"}`,
                 inline: true
+              },
+              {
+                name: "TP (Share Value)",
+                value: `$${args[5] ? parseFloat(args[5]).toFixed(2) : "-"}`
               },
               {
                 name: "Note",
                 value: `${
-                  args.length > 3 ? args.slice(3, args.length).join(" ") : "-"
+                  args.length > 6 ? args.slice(6, args.length).join(" ") : "-"
                 }`,
                 inline: false
               }

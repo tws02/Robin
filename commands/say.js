@@ -9,11 +9,11 @@ module.exports = {
 
       servers.forEach(async (server) => {
         const tChannel = client.channels.cache.get(
-          server.channelId.substring(2, server.channelId.length - 1)
+          server.stocksId.substring(2, server.stocksId.length - 1)
         );
 
         tChannel.send({
-          content: `${server.roleId}`,
+          content: `${server.stocksRoleId}`,
           embed: {
             color: regular,
             title: ``,

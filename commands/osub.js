@@ -2,15 +2,25 @@ const { green, red, regular, photoURL, footer } = require("../config.json");
 const Server = require("../database/models/Server.js");
 
 module.exports = {
-  name: "unsub",
+  name: "osub",
   async execute(client, message, args) {
     try {
       const exists = await Server.findOne({ serverId: message.guild.id });
-      if (!exists || exists.stocksId == "undefined") {
+      if (!exists) {
+        const newServer = new Server({
+          serverId: message.guild.id,
+          optionsId: args[0],
+          optionsRoleId: args[1],
+          lastMsgId: ""
+        });
+
+        server = await newServer.save();
+
         message.channel.send({
           embed: {
             color: regular,
-            title: `Server ID ${message.guild.id} is not subscribed to stock signals.`,
+            title: `Server ID ${message.guild.id} is now subscribed to options signals.`,
+            description: `Channel: ${args[0]}\nRole: ${args[1]}`,
             timestamp: new Date(),
             footer: {
               text: footer,
@@ -18,16 +28,11 @@ module.exports = {
             }
           }
         });
-      } else if (exists.stocksId && exists.stocksId != "undefined") {
-        exists.stocksId = "undefined";
-        exists.stocksRoleId = "undefined";
-
-        await exists.save();
-
+      } else if (exists.optionsId && exists.optionsId != "undefined") {
         message.channel.send({
           embed: {
             color: regular,
-            title: `Server ID ${message.guild.id} is now unsubscribed from stocks signals.`,
+            title: `Server ID ${message.guild.id} is already subscribed to options signals.`,
             timestamp: new Date(),
             footer: {
               text: footer,
@@ -36,10 +41,16 @@ module.exports = {
           }
         });
       } else {
+        exists.optionsId = args[0];
+        exists.optionsRoleId = args[1];
+
+        await exists.save();
+
         message.channel.send({
           embed: {
             color: regular,
-            title: `Server ID ${message.guild.id} is already subscribed to stocks signals.`,
+            title: `Server ID ${message.guild.id} is now subscribed to options signals.`,
+            description: `Channel: ${args[0]}\nRole: ${args[1]}`,
             timestamp: new Date(),
             footer: {
               text: footer,

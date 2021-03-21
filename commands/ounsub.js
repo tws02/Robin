@@ -6,11 +6,11 @@ module.exports = {
   async execute(client, message, args) {
     try {
       const exists = await Server.findOne({ serverId: message.guild.id });
-      if (!exists || exists.stocksId == "undefined") {
+      if (!exists) {
         message.channel.send({
           embed: {
             color: regular,
-            title: `Server ID ${message.guild.id} is not subscribed to stock signals.`,
+            title: `Server ID ${message.guild.id} is not subscribed to options signals.`,
             timestamp: new Date(),
             footer: {
               text: footer,
@@ -18,16 +18,16 @@ module.exports = {
             }
           }
         });
-      } else if (exists.stocksId && exists.stocksId != "undefined") {
-        exists.stocksId = "undefined";
-        exists.stocksRoleId = "undefined";
+      } else if (exists.optionsId && exists.optionsId != "undefined") {
+        exists.optionsId = "undefined";
+        exists.optionsRoleId = "undefined";
 
         await exists.save();
 
         message.channel.send({
           embed: {
             color: regular,
-            title: `Server ID ${message.guild.id} is now unsubscribed from stocks signals.`,
+            title: `Server ID ${message.guild.id} is now unsubscribed from options signals.`,
             timestamp: new Date(),
             footer: {
               text: footer,
@@ -39,7 +39,7 @@ module.exports = {
         message.channel.send({
           embed: {
             color: regular,
-            title: `Server ID ${message.guild.id} is already subscribed to stocks signals.`,
+            title: `Server ID ${message.guild.id} is already subscribed to stock signals.`,
             timestamp: new Date(),
             footer: {
               text: footer,

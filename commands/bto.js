@@ -1,23 +1,5 @@
 const { green, red, regular, photoURL, footer } = require("../config.json");
 const Server = require("../database/models/Server");
-/*
-Ticker Symbol: HAAC ( swing) @pen
-Entry: 11.62
-SL: 10.20
-TP 1: 13.5
-TP 2: 15
-Risk: 4/10
-*/
-
-const bto = {
-  color: regular,
-  title: "Test Message",
-  description: "testing",
-  footer: {
-    text: footer,
-    icon_url: photoURL
-  }
-};
 
 module.exports = {
   name: "bto",
@@ -27,11 +9,11 @@ module.exports = {
 
       servers.forEach(async (server) => {
         const tChannel = client.channels.cache.get(
-          server.channelId.substring(2, server.channelId.length - 1)
+          server.stocksId.substring(2, server.stocksId.length - 1)
         );
 
         tChannel.send({
-          content: `${server.roleId}`,
+          content: `${server.stocksRoleId}`,
           embed: {
             color: green,
             title: `BTO $${args[0] ? args[0].toUpperCase() : "-"} ${

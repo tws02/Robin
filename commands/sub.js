@@ -5,12 +5,22 @@ module.exports = {
   name: "sub",
   async execute(client, message, args) {
     try {
-      const exists = await Server.findOne({ id: message.guild.id });
-      if (exists) {
+      const exists = await Server.findOne({ serverId: message.guild.id });
+      if (!exists) {
+        const newServer = new Server({
+          serverId: message.guild.id,
+          stocksId: args[0],
+          stocksRoleId: args[1],
+          lastMsgId: ""
+        });
+
+        server = await newServer.save();
+
         message.channel.send({
           embed: {
             color: regular,
-            title: `Server ID ${message.guild.id} is already subscribed to signals.`,
+            title: `Server ID ${message.guild.id} is now subscribed to stock signals.`,
+            description: `Channel: ${args[0]}\nRole: ${args[1]}`,
             timestamp: new Date(),
             footer: {
               text: footer,
@@ -18,29 +28,37 @@ module.exports = {
             }
           }
         });
-        return;
-      }
-      const newServer = new Server({
-        id: message.guild.id,
-        channelId: args[0],
-        roleId: args[1],
-        lastMsgId: ""
-      });
-
-      server = await newServer.save();
-
-      message.channel.send({
-        embed: {
-          color: regular,
-          title: `Server ID ${message.guild.id} is now subscribed to signals.`,
-          description: `Channel: ${args[0]}\nRole: ${args[1]}`,
-          timestamp: new Date(),
-          footer: {
-            text: footer,
-            icon_url: photoURL
+      } else if (exists.stocksId && exists.stocksId != "undefined") {
+        message.channel.send({
+          embed: {
+            color: regular,
+            title: `Server ID ${message.guild.id} is already subscribed to stock signals.`,
+            timestamp: new Date(),
+            footer: {
+              text: footer,
+              icon_url: photoURL
+            }
           }
-        }
-      });
+        });
+      } else {
+        exists.stocksId = args[0];
+        exists.stocksRoleId = args[1];
+
+        await exists.save();
+
+        message.channel.send({
+          embed: {
+            color: regular,
+            title: `Server ID ${message.guild.id} is now subscribed to stocks signals.`,
+            description: `Channel: ${args[0]}\nRole: ${args[1]}`,
+            timestamp: new Date(),
+            footer: {
+              text: footer,
+              icon_url: photoURL
+            }
+          }
+        });
+      }
     } catch (error) {
       console.log(error);
     }

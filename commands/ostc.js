@@ -12,21 +12,23 @@ const stc = {
 };
 
 module.exports = {
-  name: "stc",
+  name: "ostc",
   async execute(client, message, args) {
     try {
       const servers = await Server.find();
 
       servers.forEach(async (server) => {
         const tChannel = client.channels.cache.get(
-          server.stocksId.substring(2, server.stocksId.length - 1)
+          server.optionsId.substring(2, server.optionsId.length - 1)
         );
 
         tChannel.send({
-          content: `${server.stocksRoleId}`,
+          content: `${server.optionsRoleId}`,
           embed: {
             color: red,
-            title: `STC $${args[0] ? args[0].toUpperCase() : "-"}`,
+            title: `STC $${args[0] ? args[0].toUpperCase() : "-"} ${
+              args[1] ? args[1] : "-"
+            } ${args[2] ? args[2] : "-"}`,
             timestamp: new Date(),
             footer: {
               text: footer,
@@ -35,18 +37,18 @@ module.exports = {
             fields: [
               {
                 name: "Exit Price",
-                value: `$${args[1] ? parseFloat(args[1]).toFixed(2) : "-"}`,
+                value: `$${args[3] ? parseFloat(args[3]).toFixed(2) : "-"}`,
                 inline: true
               },
               {
                 name: "Size",
-                value: `${args[2] ? args[2] : "-"}%`,
+                value: `${args[4] ? args[4] : "-"}%`,
                 inline: true
               },
               {
                 name: "Note",
                 value: `${
-                  args.length > 3 ? args.slice(3, args.length).join(" ") : "-"
+                  args.length > 5 ? args.slice(5, args.length).join(" ") : "-"
                 }`,
                 inline: false
               }

@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
 
 const ServerSchema = new mongoose.Schema({
-  id: {
+  serverId: {
     type: String
   },
 
-  channelId: {
+  stocksId: {
+    type: String
+  },
+
+  optionsId: {
     type: String
   },
 
@@ -13,11 +17,19 @@ const ServerSchema = new mongoose.Schema({
     type: String
   },
 
-  roleId: {
+  stocksRoleId: {
     type: String
   },
 
-  lastMsgId: {
+  optionsRoleId: {
+    type: String
+  },
+
+  stocksMsgId: {
+    type: String
+  },
+
+  optionsMsgId: {
     type: String
   },
 

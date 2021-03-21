@@ -2,28 +2,23 @@ const { green, red, regular, photoURL, footer } = require("../config.json");
 const Server = require("../database/models/Server");
 
 module.exports = {
-  name: "wl",
+  name: "osay",
   async execute(client, message, args) {
     try {
       const servers = await Server.find();
 
       servers.forEach(async (server) => {
-        if (server.wlId == "undefined" || server.wlId == null) return;
         const tChannel = client.channels.cache.get(
-          server.wlId.substring(2, server.wlId.length - 1)
+          server.optionsId.substring(2, server.optionsId.length - 1)
         );
 
-        const date = new Date();
-
         tChannel.send({
-          content: ``,
+          content: `${server.optionsRoleId}`,
           embed: {
             color: regular,
             title: ``,
-            description: `**Watchlist ${
-              date.getMonth() + 1
-            }/${date.getDate()}**\n${message.content.substring(
-              4,
+            description: `${message.content.substring(
+              5,
               message.content.length
             )}`,
             timestamp: new Date(),
