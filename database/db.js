@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { mongoURI } = require("../config.json");
+const { testURI, mongoURI } = require("../config.json");
 
 const connectDB = async () => {
   try {

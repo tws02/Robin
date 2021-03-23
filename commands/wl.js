@@ -26,6 +26,11 @@ module.exports = {
               4,
               message.content.length
             )}`,
+            image: {
+              url: `${
+                message.attachments ? message.attachments.first().url : ""
+              }`
+            },
             timestamp: new Date(),
             footer: {
               text: footer,
@@ -39,24 +44,3 @@ module.exports = {
     }
   }
 };
-
-/*
-retrieve the list of servers
-send message to every server stored on db (the channel id)
-udpate lastmsg id
-*/
-
-// store msg id
-/*tChannel.messages.fetch({ limit: 1 }, (messages) => {
-        console.log("2");
-        const tMsg = messages.first();
-        console.log(tMsg.id);
-      });*/
-/*const tMsg = tChannel.messages.fetch({ limit: 1 }).first();
-      console.log(tMsg.id);
-      server.lastMsgId = tMsg.id;
-      await server.save();
-      update last msgid
-      how to get last msg id
-      console.log(tMsg.id);
-      */

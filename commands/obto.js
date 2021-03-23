@@ -25,6 +25,11 @@ module.exports = {
               text: footer,
               icon_url: photoURL
             },
+            image: {
+              url: `${
+                message.attachments.last() ? message.attachments.last().url : ""
+              }`
+            },
             fields: [
               {
                 name: "Entry",
@@ -50,6 +55,8 @@ module.exports = {
             ]
           }
         });
+        server.optionsMsgId = tChannel.lastMessageID;
+        await server.save();
       });
     } catch (error) {
       console.log(error);

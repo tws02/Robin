@@ -1,16 +1,6 @@
 const { green, red, regular, photoURL, footer } = require("../config.json");
 const Server = require("../database/models/Server");
 
-const testMsg = {
-  color: regular,
-  title: "Test Message",
-  description: "",
-  footer: {
-    text: footer,
-    icon_url: photoURL
-  }
-};
-
 module.exports = {
   name: "test",
   async execute(client, message, args) {
@@ -26,31 +16,26 @@ module.exports = {
 
         tChannel.send({
           content: `${server.stocksRoleId}`,
-          embed: testMsg
+          embed: {
+            color: regular,
+            title: "Test Message",
+            description: "",
+            image: {
+              url: `${
+                message.attachments.last() ? message.attachments.last().url : ""
+              }`
+            },
+            footer: {
+              text: footer,
+              icon_url: photoURL
+            }
+          }
         });
-        // store msg id
-        /*tChannel.messages.fetch({ limit: 1 }, (messages) => {
-          console.log("2");
-          const tMsg = messages.first();
-          console.log(tMsg.id);
-        });*/
-        /*const tMsg = tChannel.messages.fetch({ limit: 1 }).first();
-        console.log(tMsg.id);
-        server.lastMsgId = tMsg.id;
+        server.stocksMsgId = tChannel.lastMessageID;
         await server.save();
-        update last msgid
-        how to get last msg id
-        console.log(tMsg.id);
-        */
       });
     } catch (error) {
       console.log(error);
     }
   }
 };
-
-/*
-retrieve the list of servers
-send message to every server stored on db (the channel id)
-udpate lastmsg id
-*/

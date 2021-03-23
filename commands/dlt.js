@@ -2,20 +2,27 @@ const { green, red, regular, photoURL, footer } = require("../config.json");
 
 module.exports = {
   name: "dlt",
-  execute(message, args) {
-    message.channel.send("pong");
+  async execute(client, message, args) {
+    try {
+      const servers = await Server.find();
+
+      servers.forEach(async (server) => {
+        const tChannel = client.channels.cache.get(
+          server.stocksId.substring(2, server.stocksId.length - 1)
+        );
+        tChannel.lastMessage.delete();
+      });
+
+      message.channel.send({
+        embed: {
+          color: regular,
+          title: ``,
+          description: "Last message deleted on subscribed stock channels",
+          timestamp: new Date()
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
-
-/*
-retrieve list of servers
-extract out last message IDs
-delete messages by id
-update mongoDB
-*/
-
-/*
-retrieve the list of servers
-send message to every server stored on db (the channel id)
-udpate lastmsg id
-*/
