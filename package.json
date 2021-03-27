@@ -4,9 +4,9 @@
   "description": "",
   "main": "discord.js",
   "scripts": {
+    "start": "node discord.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "robin": "nodemon discord.js",
-    "start": "node discord.js"
+    "robin": "nodemon discord.js"
   },
   "keywords": [],
   "author": "",
