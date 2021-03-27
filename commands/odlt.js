@@ -1,4 +1,4 @@
-const { green, red, regular, photoURL, footer } = require("../config.json");
+const { green, red, regular, photoURL, footer } = require("../config.js");
 
 module.exports = {
   name: "odlt",

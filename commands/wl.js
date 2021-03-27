@@ -1,4 +1,4 @@
-const { green, red, regular, photoURL, footer } = require("../config.json");
+const { green, red, regular, photoURL, footer } = require("../config.js");
 const Server = require("../database/models/Server");
 
 module.exports = {
