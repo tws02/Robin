@@ -1,8 +1,8 @@
 const fs = require("fs");
 const Discord = require("discord.js");
-const { prefix, token } = require("./config.json");
+const { prefix, token } = require("./config.js");
 const connectDB = require("./database/db.js");
-const { wsID, robinID } = require("./config.json");
+const { wsID, robinID } = require("./config.js");
 
 connectDB();
 const client = new Discord.Client();
