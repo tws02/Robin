@@ -5,7 +5,8 @@
   "main": "discord.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon discord.js"
+    "robin": "nodemon discord.js",
+    "start": "node discord.js"
   },
   "keywords": [],
   "author": "",
