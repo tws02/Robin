@@ -4,6 +4,9 @@ const { prefix, token } = require("./config.js");
 const connectDB = require("./database/db.js");
 const { wsID, robinID } = require("./config.js");
 
+require("dotenv").config();
+
+console.log(process.env);
 connectDB();
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
