@@ -2,15 +2,15 @@ const { green, red, regular, photoURL, footer } = require("../config.js");
 const Server = require("../database/models/Server.js");
 
 module.exports = {
-  name: "unsub",
+  name: "ounsub",
   async execute(client, message, args) {
     try {
       const exists = await Server.findOne({ serverId: message.guild.id });
-      if (!exists) {
+      if (!exists || exists.optionsId == "undefined") {
         message.channel.send({
           embed: {
             color: regular,
-            title: `Server ID ${message.guild.id} is not subscribed to options signals.`,
+            title: `Server ID ${message.guild.id} is not subscribed to option signals.`,
             timestamp: new Date(),
             footer: {
               text: footer,
@@ -39,7 +39,7 @@ module.exports = {
         message.channel.send({
           embed: {
             color: regular,
-            title: `Server ID ${message.guild.id} is already subscribed to stock signals.`,
+            title: `Server ID ${message.guild.id} is already subscribed to options signals.`,
             timestamp: new Date(),
             footer: {
               text: footer,
