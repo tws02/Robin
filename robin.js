@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
   return res.send("Hello");
 });
 
-app.listen(process.env.PORT || 8000, "0.0.0.0");
+app.listen(process.env.PORT || 80, "0.0.0.0");
 
 ////////////////////////////////
 
