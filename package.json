@@ -4,7 +4,7 @@
   "description": "",
   "main": "discord.js",
   "scripts": {
-    "start": "node discord.js",
+    "start": "nodemon robin.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "robin": "nodemon robin.js"
   },
