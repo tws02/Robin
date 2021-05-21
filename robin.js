@@ -3,8 +3,19 @@ const Discord = require("discord.js");
 const { prefix, token } = require("./config.js");
 const connectDB = require("./database/db.js");
 const { wsID, robinID } = require("./config.js");
-
 require("dotenv").config();
+const express = require("express");
+const app = express();
+/////////////////////////////////
+
+app.get("/", (req, res) => {
+  console.log("heartbeat");
+  return res.send("Hello");
+});
+
+app.listen(process.env.PORT || 8000, "0.0.0.0");
+
+////////////////////////////////
 
 console.log(process.env);
 connectDB();
