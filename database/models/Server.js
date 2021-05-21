@@ -13,6 +13,10 @@ const ServerSchema = new mongoose.Schema({
     type: String
   },
 
+  cryptoId: {
+    type: String
+  },
+
   wlId: {
     type: String
   },
@@ -25,11 +29,19 @@ const ServerSchema = new mongoose.Schema({
     type: String
   },
 
+  cryptoRoleId: {
+    type: String
+  },
+
   stocksMsgId: {
     type: String
   },
 
   optionsMsgId: {
+    type: String
+  },
+
+  cryptoMsgId: {
     type: String
   },
 

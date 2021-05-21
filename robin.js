@@ -11,13 +11,31 @@ connectDB();
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
-const commandFiles = fs
-  .readdirSync("./commands")
+const commandsCrypto = fs
+  .readdirSync("./commandsCrypto")
   .filter((file) => file.endsWith(".js"));
 
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  client.commands.set(command.name, command);
+const commandsOption = fs
+  .readdirSync("./commandsOption")
+  .filter((file) => file.endsWith(".js"));
+
+const commandsStock = fs
+  .readdirSync("./commandsStock")
+  .filter((file) => file.endsWith(".js"));
+
+for (const file of commandsCrypto) {
+  const commandsCrypto = require(`./commandsCrypto/${file}`);
+  client.commands.set(commandsCrypto.name, commandsCrypto);
+}
+
+for (const file of commandsOption) {
+  const commandsOption = require(`./commandsOption/${file}`);
+  client.commands.set(commandsOption.name, commandsOption);
+}
+
+for (const file of commandsStock) {
+  const commandsStock = require(`./commandsStock/${file}`);
+  client.commands.set(commandsStock.name, commandsStock);
 }
 
 client.on("ready", () => {
@@ -25,6 +43,7 @@ client.on("ready", () => {
 });
 
 client.login(token);
+console.log(client.commands);
 
 client.on("message", (message) => {
   if (
